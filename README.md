@@ -1,6 +1,6 @@
 # Prefix Demo
 
-This is a simple Python demo project designed to showcase the use of PrefixAI, an on-call SRE agent.
+This is a simple Python demonstration project designed to showcase the use of PrefixAI, an on-call SRE agent.
 
 ## Overview
 
