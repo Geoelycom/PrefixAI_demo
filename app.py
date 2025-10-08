@@ -5,33 +5,41 @@ import os
 import sys
 
 def simulate_high_cpu():
-    """Simulate high CPU usage"""
+    """Simulate high CPU usage and fail"""
     print("🔥 Simulating high CPU usage...")
     for i in range(10000000):
         pass
-    print("✅ CPU simulation complete")
+    print("❌ CPU usage exceeded threshold - FAILING")
+    sys.exit(1)  # This will cause the workflow to fail
 
 def simulate_memory_leak():
-    """Simulate memory leak"""
+    """Simulate memory leak and fail"""
     print("💾 Simulating memory leak...")
     data = []
     for i in range(100000):
         data.append("x" * 1000)
-    print("✅ Memory leak simulation complete")
+    print("❌ Memory usage exceeded threshold - FAILING")
+    sys.exit(1)  # This will cause the workflow to fail
 
 def simulate_network_timeout():
-    """Simulate network timeout"""
+    """Simulate network timeout and fail"""
     print("🌐 Simulating network timeout...")
     try:
         requests.get('http://httpstat.us/200?sleep=30000', timeout=5)
     except requests.exceptions.Timeout:
-        print("✅ Network timeout simulation complete")
+        print("❌ Network timeout occurred - FAILING")
+        sys.exit(1)  # This will cause the workflow to fail
 
 def simulate_dependency_error():
-    """Simulate dependency error (current behavior)"""
+    """Simulate dependency error and fail"""
     print("📦 Simulating dependency error...")
-    response = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json')
-    print(f"✅ Bitcoin price: ${response.json()['bpi']['USD']['rate']}")
+    try:
+        response = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json')
+        print(f"❌ Dependency check failed - FAILING")
+        sys.exit(1)  # This will cause the workflow to fail
+    except Exception as e:
+        print(f"❌ Dependency error: {e} - FAILING")
+        sys.exit(1)
 
 def main():
     failure_type = os.getenv('FAILURE_TYPE', 'dependency')
@@ -50,6 +58,7 @@ def main():
         print(f"❌ Unknown failure type: {failure_type}")
         sys.exit(1)
     
+    # This line will never be reached because all functions exit with error
     print("🎉 Demo completed successfully!")
 
 if __name__ == "__main__":

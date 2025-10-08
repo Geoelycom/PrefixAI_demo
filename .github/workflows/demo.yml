@@ -32,11 +32,11 @@ jobs:
           FAILURE_TYPE: ${{ github.event.inputs.failure_type }}
         run: python app.py
       
-      - name: Send webhook to SRE Agent
+      - name: Send webhook to SRE Agent (on failure)
         if: failure()
         run: |
-          curl -X POST http://your-local-ip:8080/webhooks/github \
-            -H "Authorization: Bearer your-api-key" \
+          curl -X POST https://6d961301d31f.ngrok-free.app/webhooks/github \
+            -H "Authorization: Bearer prod_prometheus_abc123def456ghi789jkl012mno345pqr678stu901vwx234yz" \
             -H "Content-Type: application/json" \
             -d '{
               "repository": "${{ github.repository }}",
