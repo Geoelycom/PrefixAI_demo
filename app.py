@@ -28,7 +28,7 @@ def simulate_network_timeout():
         print("✅ Network timeout simulation complete")
 
 def simulate_dependency_error():
-    """Simulate dependency error (current behavior)"""
+    """Simulate the dependency error (current behavior)"""
     print("📦 Simulating dependency error...")
     response = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json')
     print(f"✅ Bitcoin price: ${response.json()['bpi']['USD']['rate']}")
