@@ -35,7 +35,7 @@ jobs:
       - name: Send webhook to SRE Agent (on failure)
         if: failure()
         run: |
-          curl -X POST  https://f338b604c359.ngrok-free.app
+          curl -X POST  https://abf52c623cec.ngrok-free.app
           /webhooks/github \
             -H "Authorization: Bearer prod_prometheus_abc123def456ghi789jkl012mno345pqr678stu901vwx234yz" \
             -H "Content-Type: application/json" \
